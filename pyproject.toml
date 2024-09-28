@@ -1,0 +1,109 @@
+[project]
+name = "layon"
+version = "0.1.0"
+description = "Job search utility"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.ruff]
+lint.select = ["ALL"]
+lint.ignore = [
+    "Q",
+    "D",
+    "ANN",
+    "INP",
+    "N999",
+    "E712",   # Allow using if x == False, as it's not always equivalent to if x.
+    "E501",   # Supress line-too-long warnings: trust black's judgement on this one.
+    "A003",   # Allow shawoding class attribute: django uses id.
+    "B904",   # Allow unchained exceptions: it's fine to raise 404 in django.
+    "E501",   # Supress line-too-long warnings: trust black's judgement on this one.
+    "FBT002", # boolean positional arguments
+    "PGH003", # Use specific rule codes when ignoring type issues
+    "TD003",  # Missing issue link with TODO
+]
+
+lint.fixable = [
+    "F401",   # Remove unused imports.
+    "NPY001", # Fix numpy types, which are removed in 1.24.
+    "RUF100", # Remove unused noqa comments.
+    "I001",   # auto sort imports
+    "W292",   # Add empty line at the end of the file
+    "TRY003", # extract exception message
+]
+
+# Unlike Flake8, default to a complexity level of 10.
+lint.mccabe.max-complexity = 10
+
+# Allow unused variables when underscore-prefixed.
+lint.dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+# Same as Black.
+line-length = 160
+
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "venv",
+    "env",
+    "migrations",
+    "tests",
+]
+
+[tool.mypy]
+exclude = '/migrations/'
+strict_equality = true
+extra_checks = true
+
+# 3rd party import
+ignore_missing_imports = true
+
+# dynamic typing
+disallow_any_unimported = false
+disallow_any_expr = false
+disallow_any_decorated = false
+disallow_any_explicit = true
+disallow_any_generics = false
+disallow_subclassing_any = true
+
+# untyped
+# disallow_untyped_defs = false
+check_untyped_defs = true
+# disallow_incomplete_defs = true
+disallow_untyped_decorators = true
+
+# None and Optional
+no_implicit_optional = true
+
+# Warnings
+warn_return_any = false
+warn_unreachable = true
+warn_unused_configs = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+
+# disable misc
+disable_error_code = "misc"

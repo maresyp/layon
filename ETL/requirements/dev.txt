@@ -1,0 +1,9 @@
+ruff
+mypy
+tox
+tox-gh-actions
+pytest
+pytest-html
+pytest-cov
+daphne
+pytest-asyncio
