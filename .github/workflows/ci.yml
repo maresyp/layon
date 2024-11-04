@@ -1,0 +1,32 @@
+name: Test and lint
+
+on:
+    pull_request:
+      types:
+        - opened
+        - synchronize
+      branches:
+        - main
+        - develop
+
+jobs:
+  build_and_test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        python-version: [3.12]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version-file: "pyproject.toml"
+
+    - name: Install uv
+      uses: astral-sh/setup-uv@v3
+
+    - name: Test with Tox
+      run: uvx --with=tox-uv tox run
