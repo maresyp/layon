@@ -77,7 +77,7 @@ exclude = [
 ]
 
 [tool.mypy]
-exclude = '/migrations/'
+pretty = true
 strict_equality = true
 extra_checks = true
 
