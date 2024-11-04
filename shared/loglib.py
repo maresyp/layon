@@ -116,13 +116,13 @@ def _init_logger(logger_type: LoggerType, name: str) -> logging.Logger:
         case LoggerType.DEBUG:
             logging.config.dictConfig(_logging_queue_rotating_file_DEBUG_config)
         case _:
-            msg: str = f"Non existing logger type: {logger_type}"
+            msg: str = f"Non existing logger type: {logger_type}"  # type: ignore
             raise ValueError(msg)
 
     queue_handler = logging.getHandlerByName("queue_handler")
     if queue_handler is not None:
-        queue_handler.listener.start()
-        atexit.register(queue_handler.listener.stop)
+        queue_handler.listener.start()  # type: ignore
+        atexit.register(queue_handler.listener.stop)  # type: ignore
 
     return logger
 
